@@ -75,8 +75,9 @@ def signup_for_activity(activity_name: str, email: str):
             detail="Student is already signed up"
         )
 
-    # Add student
+    # Add student and persist
     activity["participants"].append(email)
+    save_activities(activities)
     return {"message": f"Signed up {email} for {activity_name}"}
 
 
@@ -97,6 +98,7 @@ def unregister_from_activity(activity_name: str, email: str):
             detail="Student is not signed up for this activity"
         )
 
-    # Remove student
+    # Remove student and persist
     activity["participants"].remove(email)
+    save_activities(activities)
     return {"message": f"Unregistered {email} from {activity_name}"}
